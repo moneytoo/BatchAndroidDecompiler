@@ -17,9 +17,14 @@ function process_app {
 
 	echo ${NAME}
 
-	${BAKSMALI} ${FULLNAME} -o ${OUT}/${TYPE}-smali/${NAME}
-	${ENJARIFY} ${FULLNAME} -o ${OUT}/${TYPE}-jar/${NAME}.jar && \
-		${CFR} ${OUT}/${TYPE}-jar/${NAME}.jar --outputdir ${OUT}/${TYPE}-java/${NAME} --silent true #--caseinsensitivefs true
+	if [ ! -d ${OUT}/${TYPE}-smali/${NAME} ]; then
+		${BAKSMALI} ${FULLNAME} -o ${OUT}/${TYPE}-smali/${NAME}
+	fi
+
+	if [ ! -d ${OUT}/${TYPE}-java/${NAME} ]; then
+		${ENJARIFY} ${FULLNAME} -o ${OUT}/${TYPE}-jar/${NAME}.jar && \
+			${CFR} ${OUT}/${TYPE}-jar/${NAME}.jar --outputdir ${OUT}/${TYPE}-java/${NAME} --silent true #--caseinsensitivefs true
+	fi
 }
 
 for DIR in app framework
@@ -27,7 +32,7 @@ do
 	for FILE in ${OUT}/${DIR}-dex/*.dex
 	do
 		echo ${FILE}
-		wait_parallel
-		process_app ${FILE} ${DIR} &
+		#wait_parallel
+		process_app ${FILE} ${DIR} # &
 	done
 done
