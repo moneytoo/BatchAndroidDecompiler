@@ -2,10 +2,10 @@
 
 . _tools
 
-${APKTOOL} if ${SYSTEM}/framework/framework-res.apk
-${APKTOOL} if ${SYSTEM}/framework/twframework-res.apk
+#${APKTOOL} if ${SYSTEM}/framework/framework-res.apk
+#${APKTOOL} if ${SYSTEM}/framework/twframework-res.apk
 
-for APP in _Maps_9.49.2
+for APP in SecSettings2
 #Bluetooth TeleService
 #SystemUI SecSettings2 SecSettingsProvider2 SettingsReceiver 
 #for APP in MtpApplication SecMediaProvider ThemeCenter
@@ -21,7 +21,7 @@ do
 	fi
 
 	if [ ! -f ${OUT}/app-dex/${APP}.dex ]; then
-		${OAT2DEX} -o ${OUT}/app-dex/ ${SYSTEM}/${APP_TYPE}/${APP}/oat/arm64/${APP}.odex ${SYSTEM}/framework/arm64/dex/
-		#${OAT2DEX} -o ${OUT}/app-dex/ ${SYSTEM}/${APP_TYPE}/${APP}/oat/arm/${APP}.odex ${SYSTEM}/framework/arm/dex/
+		${BAKSMALI} deodex --bootclasspath ${SYSTEM}/framework/arm64/boot.oat ${SYSTEM}/${APP_TYPE}/${APP}/oat/arm64/${APP}.odex -o ${OUT}/app-smali/${APP}
+		${SMALI} assemble ${OUT}/app-smali/${APP} -o ${OUT}/app-dex/${APP}.dex
 	fi
 done
