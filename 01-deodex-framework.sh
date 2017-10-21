@@ -10,17 +10,13 @@ do
 	mkdir -p ${OUT}/app-${DIR}
 done
 
-for ARCH in arm arm64
+for ARCH in arm64 #arm
 do
-	${OAT2DEX} boot ${SYSTEM}/framework/${ARCH}/boot.oat
-	#${OAT2DEX} -o ${OUT}/framework-boot-${ARCH}/ boot ${SYSTEM}/framework/${ARCH}/boot.oat
-	
-	for FILE in ${SYSTEM}/framework/oat/${ARCH}/*
+	for FILE in ${SYSTEM}/framework/oat/${ARCH}/*.odex ${SYSTEM}/framework/${ARCH}/*.oat
 	do
 		echo $FILE
-		${OAT2DEX} -o ${OUT}/framework-dex/ $FILE ${SYSTEM}/framework/${ARCH}/dex/
-		#${OAT2DEX} -o ${OUT}/framework-dex/ $FILE ${OUT}/framework-boot-${ARCH}/
+		${BAKSMALI} deodex --bootclasspath ${SYSTEM}/framework/${ARCH}/boot.oat $FILE -o ${OUT}/framework-smali/`basename ${FILE%.*}`
+		${SMALI} assemble ${OUT}/framework-smali/`basename ${FILE%.*}` -o ${OUT}/framework-dex/`basename ${FILE%.*}`.dex
 	done
-done
 
-cp -r ${SYSTEM}/framework/oat/arm*/*.dex ${OUT}/framework-dex
+done
