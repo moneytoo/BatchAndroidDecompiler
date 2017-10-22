@@ -15,8 +15,7 @@ do
 	for FILE in ${SYSTEM}/framework/oat/${ARCH}/*.odex ${SYSTEM}/framework/${ARCH}/*.oat
 	do
 		echo $FILE
-		${BAKSMALI} deodex --bootclasspath ${SYSTEM}/framework/${ARCH}/boot.oat $FILE -o ${OUT}/framework-smali/`basename ${FILE%.*}`
-		${SMALI} assemble ${OUT}/framework-smali/`basename ${FILE%.*}` -o ${OUT}/framework-dex/`basename ${FILE%.*}`.dex
+		${BAKSMALI} deodex --bootclasspath ${SYSTEM}/framework/${ARCH}/boot.oat $FILE --api 24 --output ${OUT}/framework-smali/`basename ${FILE%.*}`
+		${SMALI} assemble ${OUT}/framework-smali/`basename ${FILE%.*}` --api 24 --output ${OUT}/framework-dex/`basename ${FILE%.*}`.dex
 	done
-
 done

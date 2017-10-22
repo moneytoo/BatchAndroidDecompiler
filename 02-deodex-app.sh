@@ -21,7 +21,7 @@ do
 	fi
 
 	if [ ! -f ${OUT}/app-dex/${APP}.dex ]; then
-		${BAKSMALI} deodex --bootclasspath ${SYSTEM}/framework/arm64/boot.oat ${SYSTEM}/${APP_TYPE}/${APP}/oat/arm64/${APP}.odex -o ${OUT}/app-smali/${APP}
+		${BAKSMALI} deodex --bootclasspath ${SYSTEM}/framework/arm64/boot.oat ${SYSTEM}/${APP_TYPE}/${APP}/oat/arm64/${APP}.odex --output ${OUT}/app-smali/${APP}
 		${SMALI} assemble ${OUT}/app-smali/${APP} -o ${OUT}/app-dex/${APP}.dex
 	fi
 done
