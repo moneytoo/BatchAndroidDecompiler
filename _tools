@@ -2,10 +2,9 @@
 
 BAKSMALI="java -jar baksmali-2.2.1.jar"
 SMALI="java -jar smali-2.2.1.jar"
-CFR="java -jar cfr_0_118.jar"
-APKTOOL="java -jar apktool_2.2.0.jar"
+CFR="java -jar cfr_0_123.jar"
+APKTOOL="java -jar apktool_2.3.0.jar"
 ENJARIFY="./enjarify/enjarify.sh"
-OAT2DEX="java -jar oat2dex.jar"
 
 THREADS="6" # min 2 required
 

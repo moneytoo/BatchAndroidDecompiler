@@ -23,7 +23,7 @@ function process_app {
 
 	if [ ! -d ${OUT}/${TYPE}-java/${NAME} ]; then
 		${ENJARIFY} ${FULLNAME} -o ${OUT}/${TYPE}-jar/${NAME}.jar && \
-			${CFR} ${OUT}/${TYPE}-jar/${NAME}.jar --outputdir ${OUT}/${TYPE}-java/${NAME} --silent true #--caseinsensitivefs true
+			${CFR} ${OUT}/${TYPE}-jar/${NAME}.jar --outputdir ${OUT}/${TYPE}-java/${NAME} --silent true --caseinsensitivefs true
 	fi
 }
 
