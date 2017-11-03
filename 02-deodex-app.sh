@@ -5,7 +5,7 @@
 #${APKTOOL} if ${SYSTEM}/framework/framework-res.apk
 #${APKTOOL} if ${SYSTEM}/framework/twframework-res.apk
 
-for APP in SecSettings2
+for APP in SecSettings2 SystemUI imsservice
 #Bluetooth TeleService
 #SystemUI SecSettings2 SecSettingsProvider2 SettingsReceiver 
 #for APP in MtpApplication SecMediaProvider ThemeCenter

@@ -1,13 +1,13 @@
 #!/bin/bash
 
-BAKSMALI="java -jar baksmali-2.1.3.jar"
-CFR="java -jar cfr_0_118.jar"
-APKTOOL="java -jar apktool_2.2.0.jar"
+BAKSMALI="java -jar baksmali-2.2.1.jar"
+CFR="java -jar cfr_0_123.jar"
+APKTOOL="java -jar apktool_2.3.0.jar"
 ENJARIFY="./enjarify/enjarify.sh"
 
 OUT="./apks"
 
-for APP in "Chrome_Beta-com.chrome.beta-62.0.3202.29-320202901"
+for APP in "imsservice"
 do
 	echo ${APP}
 	NAME=${APP}
@@ -18,8 +18,8 @@ do
 	fi
 
 	if [ ! -d ${OUT}/app-smali/${NAME} ]; then
-		mkdir ${OUT}/app-smali/${NAME}
-		${BAKSMALI} ${OUT}/${APP}.apk -o ${OUT}/app-smali/${NAME}
+		mkdir -p ${OUT}/app-smali/${NAME}
+		${BAKSMALI} disassemble ${OUT}/${APP}.apk -o ${OUT}/app-smali/${NAME}
 	fi
 
 	if [ ! -d ${OUT}/app-java/${NAME} ]; then
